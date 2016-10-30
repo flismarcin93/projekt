@@ -38,7 +38,13 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Place", inversedBy="comments")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
-    private $place;
+    protected $place;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
     /**
      * Get id
@@ -121,5 +127,29 @@ class Comment
     public function getPlace()
     {
         return $this->place;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Comment
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

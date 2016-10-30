@@ -53,6 +53,15 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     */
+    protected $comments;
+    public function __construct()
+    {
+        $this->comments=new ArrayCollection();
+    }
+
     // other properties and methods
 
     public function getEmail()
@@ -132,5 +141,15 @@ class User implements UserInterface
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }
