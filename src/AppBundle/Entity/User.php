@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -54,12 +55,18 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\OneToMany(targetEntity="Mark", mappedBy="user")
+     */
+    protected $marks;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
      */
     protected $comments;
     public function __construct()
     {
         $this->comments=new ArrayCollection();
+        $this->marks=new ArrayCollection();
     }
 
     // other properties and methods
@@ -185,5 +192,39 @@ class User implements UserInterface
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     *
+     * @return User
+     */
+    public function addMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks[] = $mark;
+
+        return $this;
+    }
+
+    /**
+     * Remove mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     */
+    public function removeMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks->removeElement($mark);
+    }
+
+    /**
+     * Get marks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMarks()
+    {
+        return $this->marks;
     }
 }

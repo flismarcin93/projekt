@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +51,11 @@ class Place
     //{
      //   $this->events=new ArrayCollection();
     //}
+    /**
+     * @ORM\OneToMany(targetEntity="Mark", mappedBy="mark")
+     */
+    protected $marks;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
@@ -59,6 +65,7 @@ class Place
     {
         $this->events=new ArrayCollection();
         $this->comments=new ArrayCollection();
+        $this->marks-new ArrayCollection();
     }
 
     /**
@@ -208,5 +215,39 @@ class Place
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     *
+     * @return Place
+     */
+    public function addMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks[] = $mark;
+
+        return $this;
+    }
+
+    /**
+     * Remove mark
+     *
+     * @param \AppBundle\Entity\Mark $mark
+     */
+    public function removeMark(\AppBundle\Entity\Mark $mark)
+    {
+        $this->marks->removeElement($mark);
+    }
+
+    /**
+     * Get marks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMarks()
+    {
+        return $this->marks;
     }
 }
