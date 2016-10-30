@@ -31,7 +31,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -42,8 +42,23 @@ class Event
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="event")
+     * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
+     */
+    private $place;
+
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     */
+    protected $comments;
+    public function __construct()
+    {
+        $this->comments=new ArrayCollection();
+    }
+
+/**
      * Get id
      *
      * @return int
@@ -124,5 +139,27 @@ class Event
     {
         return $this->date;
     }
-}
+    /**
+     * Set place
+     *
+     * @param \AppBundle\Entity\Place $place
+     *
+     * @return Event
+     */
+    public function setPlace(\AppBundle\Entity\Place $place = null)
+    {
+        $this->place = $place;
 
+        return $this;
+    }
+
+    /**
+     * Get place
+     *
+     * @return \AppBundle\Entity\Place
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+}

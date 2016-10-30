@@ -1,0 +1,125 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Comment
+ *
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
+ */
+class Comment
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    protected $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="comments")
+     * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
+     */
+    private $place;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return Comment
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set event
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Comment
+     */
+    public function setEvent(\AppBundle\Entity\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+
+    /**
+     * Set place
+     *
+     * @param \AppBundle\Entity\Place $place
+     *
+     * @return Comment
+     */
+    public function setPlace(\AppBundle\Entity\Place $place = null)
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Get place
+     *
+     * @return \AppBundle\Entity\Place
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+}

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RegistrationController extends Controller
 {
     /**
-     * @Route("/register")
+     * @Route("/register", name="register")
      */
     public function registerAction(Request $request)
     {
@@ -32,9 +32,6 @@ class RegistrationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
 
             return $this->render(
                 'AppBundle:registration:registered.html.twig',

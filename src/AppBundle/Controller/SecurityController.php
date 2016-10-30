@@ -4,39 +4,26 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends Controller
 {
     /**
-     * @Route("/login")
+     * @Route("/login", name="login")
      */
     public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
-        // pobranie błędu logowania, jeśli sie taki pojawił
+        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // nazwa użytkownika ostatnio wprowadzona przez aktualnego użytkownika
+        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render(
-            'AppBundle:security/login.html.twig',
-            array(
-                // nazwa użytkownika ostatnio wprowadzona przez aktualnego użytkownika
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            )
-        );
-    }
-
-    /**
-     * @Route("/loginCheck")
-     */
-    public function loginCheckAction()
-    {
-        return $this->render('AppBundle:security:login_check.html.twig', array(
-            // ...
+        return $this->render('AppBundle:Security:login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ));
     }
 

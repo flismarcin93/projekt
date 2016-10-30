@@ -31,7 +31,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -43,10 +43,20 @@ class Event
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="event")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
     private $place;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     */
+    protected $comments;
+    public function __construct()
+    {
+        $this->comments=new ArrayCollection();
+    }
 
 /**
      * Get id
@@ -151,5 +161,39 @@ class Event
     public function getPlace()
     {
         return $this->place;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Event
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

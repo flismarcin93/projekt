@@ -38,10 +38,28 @@ class Place
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="place")
+     */
+    protected $events;
+   // public function __construct()
+    //{
+     //   $this->events=new ArrayCollection();
+    //}
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     */
+    protected $comments;
+    public function __construct()
+    {
+        $this->events=new ArrayCollection();
+        $this->comments=new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -124,5 +142,37 @@ class Place
     {
         return $this->description;
     }
-}
+    /**
+     * Add event
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Place
+     */
+    public function addEvent(\AppBundle\Entity\Event $eventt)
+    {
+        $this->events[] = $eventt;
 
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \AppBundle\Entity\Event $eventt
+     */
+    public function removeEvent(\AppBundle\Entity\Event $eventt)
+    {
+        $this->events->removeElement($eventt);
+    }
+
+    /**
+     * Get Event
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+}
