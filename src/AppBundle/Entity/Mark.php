@@ -29,19 +29,19 @@ class Mark
     private $mark;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="mark")
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="marks")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
     private $place;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="mark")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="marks")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $event;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="mark")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="marks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

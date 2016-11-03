@@ -51,6 +51,7 @@ class Event
 
     /**
      * @ORM\OneToMany(targetEntity="Mark", mappedBy="event")
+     *
      */
     protected $marks;
 
@@ -236,5 +237,9 @@ class Event
     public function getMarks()
     {
         return $this->marks;
+    }
+    function __toString()
+    {
+        return $this->name;
     }
 }

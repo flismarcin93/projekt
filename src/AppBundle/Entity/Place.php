@@ -52,21 +52,16 @@ class Place
      //   $this->events=new ArrayCollection();
     //}
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="mark")
+     * @ORM\OneToMany(targetEntity="Mark", mappedBy="place")
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="place")
      */
     protected $comments;
-    public function __construct()
-    {
-        $this->events=new ArrayCollection();
-        $this->comments=new ArrayCollection();
-        $this->marks-new ArrayCollection();
-    }
+
 
     /**
      * Get id
@@ -250,4 +245,20 @@ class Place
     {
         return $this->marks;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->marks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

@@ -227,4 +227,10 @@ class User implements UserInterface
     {
         return $this->marks;
     }
+
+    function __toString()
+    {
+        return (string)$this->username;
+    }
+
 }

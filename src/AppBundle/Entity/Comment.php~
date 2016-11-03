@@ -38,7 +38,7 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Place", inversedBy="comments")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
-    protected $place;
+    private $place;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
