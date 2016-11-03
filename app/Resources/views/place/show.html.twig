@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Place</h1>
+    <h1>Lokal</h1>
 
     <table>
         <tbody>
@@ -26,10 +26,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('place_index') }}">Back to the list</a>
+            <a href="{{ path('place_index') }}">Wróć do listy wydarzeń</a>
         </li>
         <li>
-            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edit</a>
+            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edytuj</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
