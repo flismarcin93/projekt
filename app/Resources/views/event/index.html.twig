@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Event list</h1>
+    <h1>Lista wydarzeń</h1>
 
     <table>
         <thead>
@@ -17,16 +17,19 @@
         {% for event in events %}
             <tr>
                 <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                <td>{{ event.name }}</td>
+                <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a></td>
                 <td>{{ event.description }}</td>
                 <td>{% if event.date %}{{ event.date|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('event_show', { 'id': event.id }) }}">show</a>
+                            <a href="{{ path('event_show', { 'id': event.id }) }}">Pokaz</a>
                         </li>
                         <li>
                             <a href="{{ path('event_edit', { 'id': event.id }) }}">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +40,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('event_new') }}">Stwórz nowe wydarzenie</a>
+            <a href="{{ path('event_new') }}">Stwórz nowe</a>
         </li>
     </ul>
 {% endblock %}

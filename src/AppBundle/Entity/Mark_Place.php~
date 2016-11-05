@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * Mark_Place
  *
- * @ORM\Table(name="comment")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
+ * @ORM\Table(name="mark__place")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Mark_PlaceRepository")
  */
-class Comment
+class Mark_Place
 {
     /**
      * @var int
@@ -22,30 +22,24 @@ class Comment
     private $id;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="mark", type="integer")
      */
-    private $content;
+    private $mark;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     */
-    protected $event;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="place_marks")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
     private $place;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="marks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user;
-
+    private $user;
     /**
      * Get id
      *
@@ -57,60 +51,35 @@ class Comment
     }
 
     /**
-     * Set content
+     * Set mark
      *
-     * @param string $content
+     * @param integer $mark
      *
-     * @return Comment
+     * @return Mark_Place
      */
-    public function setContent($content)
+    public function setMark($mark)
     {
-        $this->content = $content;
+        $this->mark = $mark;
 
         return $this;
     }
 
     /**
-     * Get content
+     * Get mark
      *
-     * @return string
+     * @return int
      */
-    public function getContent()
+    public function getMark()
     {
-        return $this->content;
+        return $this->mark;
     }
-
-    /**
-     * Set event
-     *
-     * @param \AppBundle\Entity\Event $event
-     *
-     * @return Comment
-     */
-    public function setEvent(\AppBundle\Entity\Event $event = null)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return \AppBundle\Entity\Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
 
     /**
      * Set place
      *
      * @param \AppBundle\Entity\Place $place
      *
-     * @return Comment
+     * @return Mark_Place
      */
     public function setPlace(\AppBundle\Entity\Place $place = null)
     {
@@ -134,7 +103,7 @@ class Comment
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return Comment
+     * @return Mark_Place
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {

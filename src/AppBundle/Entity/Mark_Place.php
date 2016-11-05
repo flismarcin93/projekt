@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mark
+ * Mark_Place
  *
- * @ORM\Table(name="mark")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MarkRepository")
+ * @ORM\Table(name="mark__place")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Mark_PlaceRepository")
  */
-class Mark
+class Mark_Place
 {
     /**
      * @var int
@@ -29,23 +29,17 @@ class Mark
     private $mark;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="marks")
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="place_marks")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
     private $place;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="marks")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     */
-    private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="marks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-
     /**
      * Get id
      *
@@ -61,7 +55,7 @@ class Mark
      *
      * @param integer $mark
      *
-     * @return Mark
+     * @return Mark_Place
      */
     public function setMark($mark)
     {
@@ -85,7 +79,7 @@ class Mark
      *
      * @param \AppBundle\Entity\Place $place
      *
-     * @return Mark
+     * @return Mark_Place
      */
     public function setPlace(\AppBundle\Entity\Place $place = null)
     {
@@ -105,35 +99,11 @@ class Mark
     }
 
     /**
-     * Set event
-     *
-     * @param \AppBundle\Entity\Event $event
-     *
-     * @return Mark
-     */
-    public function setEvent(\AppBundle\Entity\Event $event = null)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return \AppBundle\Entity\Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return Mark
+     * @return Mark_Place
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {

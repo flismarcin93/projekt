@@ -50,16 +50,16 @@ class Event
     private $place;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="event")
      *
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="event")
      */
-    protected $comments;
+    protected $event_comments;
     public function __construct()
     {
         $this->comments=new ArrayCollection();
@@ -237,5 +237,43 @@ class Event
     public function getMarks()
     {
         return $this->marks;
+    }
+    function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     *
+     * @return Event
+     */
+    public function addEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments[] = $eventComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     */
+    public function removeEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments->removeElement($eventComment);
+    }
+
+    /**
+     * Get eventComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventComments()
+    {
+        return $this->event_comments;
     }
 }

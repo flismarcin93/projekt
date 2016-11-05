@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Event edit</h1>
+    <h1>Edycja wydarzeń</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -10,12 +10,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('event_index') }}">Wróć do listy wydarzeń</a>
+            <a href="{{ path('event_index') }}">Powrót do listy</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a>
         </li>
     </ul>
 {% endblock %}

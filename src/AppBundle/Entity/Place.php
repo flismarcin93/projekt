@@ -52,15 +52,15 @@ class Place
      //   $this->events=new ArrayCollection();
     //}
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place")
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="place")
      */
-    protected $comments;
+    protected $place_comments;
 
 
     /**
@@ -252,7 +252,7 @@ class Place
     {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
         $this->marks = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->place_comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     function __toString()
@@ -261,4 +261,38 @@ class Place
     }
 
 
+
+    /**
+     * Add placeComment
+     *
+     * @param \AppBundle\Entity\Comment_Place $placeComment
+     *
+     * @return Place
+     */
+    public function addPlaceComment(\AppBundle\Entity\Comment_Place $placeComment)
+    {
+        $this->place_comments[] = $placeComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove placeComment
+     *
+     * @param \AppBundle\Entity\Comment_Place $placeComment
+     */
+    public function removePlaceComment(\AppBundle\Entity\Comment_Place $placeComment)
+    {
+        $this->place_comments->removeElement($placeComment);
+    }
+
+    /**
+     * Get placeComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlaceComments()
+    {
+        return $this->place_comments;
+    }
 }

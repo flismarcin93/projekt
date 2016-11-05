@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventType extends AbstractType
+class Mark_PlaceType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,9 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->setAction('')
-            ->add('name')
-            ->add('description')
-            ->add('date')
+            ->add('mark')
             ->add('place')
+            ->add('user')
         ;
     }
     
@@ -29,7 +27,7 @@ class EventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Event'
+            'data_class' => 'AppBundle\Entity\Mark_Place'
         ));
     }
 }

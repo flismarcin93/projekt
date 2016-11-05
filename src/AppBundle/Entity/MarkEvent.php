@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mark
+ * MarkEvent
  *
- * @ORM\Table(name="mark")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MarkRepository")
+ * @ORM\Table(name="mark_event")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MarkEventRepository")
  */
-class Mark
+class MarkEvent
 {
     /**
      * @var int
@@ -27,12 +27,6 @@ class Mark
      * @ORM\Column(name="mark", type="integer")
      */
     private $mark;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="marks")
-     * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
-     */
-    private $place;
 
     /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="marks")
@@ -61,7 +55,7 @@ class Mark
      *
      * @param integer $mark
      *
-     * @return Mark
+     * @return MarkEvent
      */
     public function setMark($mark)
     {
@@ -81,35 +75,11 @@ class Mark
     }
 
     /**
-     * Set place
-     *
-     * @param \AppBundle\Entity\Place $place
-     *
-     * @return Mark
-     */
-    public function setPlace(\AppBundle\Entity\Place $place = null)
-    {
-        $this->place = $place;
-
-        return $this;
-    }
-
-    /**
-     * Get place
-     *
-     * @return \AppBundle\Entity\Place
-     */
-    public function getPlace()
-    {
-        return $this->place;
-    }
-
-    /**
      * Set event
      *
      * @param \AppBundle\Entity\Event $event
      *
-     * @return Mark
+     * @return MarkEvent
      */
     public function setEvent(\AppBundle\Entity\Event $event = null)
     {
@@ -133,7 +103,7 @@ class Mark
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return Mark
+     * @return MarkEvent
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {

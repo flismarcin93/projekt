@@ -50,16 +50,16 @@ class Event
     private $place;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="event")
      *
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="event")
      */
-    protected $comments;
+    protected $event_comments;
     public function __construct()
     {
         $this->comments=new ArrayCollection();
@@ -178,9 +178,9 @@ class Event
      *
      * @return Event
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(\AppBundle\Entity\Comment_Event $comment)
     {
-        $this->comments[] = $comment;
+        $this->event_comments[] = $comment;
 
         return $this;
     }
@@ -190,7 +190,7 @@ class Event
      *
      * @param \AppBundle\Entity\Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(\AppBundle\Entity\Comment_Event $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -212,7 +212,7 @@ class Event
      *
      * @return Event
      */
-    public function addMark(\AppBundle\Entity\Mark $mark)
+    public function addMark(\AppBundle\Entity\MarkEvent $mark)
     {
         $this->marks[] = $mark;
 
@@ -224,7 +224,7 @@ class Event
      *
      * @param \AppBundle\Entity\Mark $mark
      */
-    public function removeMark(\AppBundle\Entity\Mark $mark)
+    public function removeMark(\AppBundle\Entity\MarkEvent $mark)
     {
         $this->marks->removeElement($mark);
     }
@@ -241,5 +241,39 @@ class Event
     function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Add eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     *
+     * @return Event
+     */
+    public function addEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments[] = $eventComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     */
+    public function removeEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments->removeElement($eventComment);
+    }
+
+    /**
+     * Get eventComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventComments()
+    {
+        return $this->event_comments;
     }
 }

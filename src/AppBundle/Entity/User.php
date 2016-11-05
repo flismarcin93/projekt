@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 /**
  * User
  *
@@ -18,219 +20,183 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
-    private $email;
+ * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="user")
+ */
+    protected $place_marks;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="user")
      */
-    private $username;
+    protected $event_marks;
+
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="user")
      */
-    private $plainPassword;
+    protected $place_comments;
+
 
     /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
-     * @ORM\Column(type="string", length=64)
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user")
      */
-    private $password;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Mark", mappedBy="user")
-     */
-    protected $marks;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
-     */
-    protected $comments;
+    protected $event_comments;
     public function __construct()
     {
-        $this->comments=new ArrayCollection();
-        $this->marks=new ArrayCollection();
+        parent::__construct();
+        $this->event_comments=new ArrayCollection();
+        $this->place_comments=new ArrayCollection();
+        $this->event_marks=new ArrayCollection();
+        $this->place_marks=new ArrayCollection();
     }
-
-    // other properties and methods
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    public function getSalt()
-    {
-        // The bcrypt algorithm doesn't require a separate salt.
-        return null;
-    }
-
-    // other methods, including security methods like getRoles()
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized);
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     *
-     * @return User
-     */
-    public function addComment(\AppBundle\Entity\Comment $comment)
-    {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Add mark
-     *
-     * @param \AppBundle\Entity\Mark $mark
-     *
-     * @return User
-     */
-    public function addMark(\AppBundle\Entity\Mark $mark)
-    {
-        $this->marks[] = $mark;
-
-        return $this;
-    }
-
-    /**
-     * Remove mark
-     *
-     * @param \AppBundle\Entity\Mark $mark
-     */
-    public function removeMark(\AppBundle\Entity\Mark $mark)
-    {
-        $this->marks->removeElement($mark);
-    }
-
-    /**
-     * Get marks
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMarks()
-    {
-        return $this->marks;
-    }
-
     function __toString()
     {
         return (string)$this->username;
     }
 
+
+    /**
+     * Add placeMark
+     *
+     * @param \AppBundle\Entity\Mark_Place $placeMark
+     *
+     * @return User
+     */
+    public function addPlaceMark(\AppBundle\Entity\Mark_Place $placeMark)
+    {
+        $this->place_marks[] = $placeMark;
+
+        return $this;
+    }
+
+    /**
+     * Remove placeMark
+     *
+     * @param \AppBundle\Entity\Mark_Place $placeMark
+     */
+    public function removePlaceMark(\AppBundle\Entity\Mark_Place $placeMark)
+    {
+        $this->place_marks->removeElement($placeMark);
+    }
+
+    /**
+     * Get placeMarks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlaceMarks()
+    {
+        return $this->place_marks;
+    }
+
+    /**
+     * Add eventMark
+     *
+     * @param \AppBundle\Entity\MarkEvent $eventMark
+     *
+     * @return User
+     */
+    public function addEventMark(\AppBundle\Entity\MarkEvent $eventMark)
+    {
+        $this->event_marks[] = $eventMark;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventMark
+     *
+     * @param \AppBundle\Entity\MarkEvent $eventMark
+     */
+    public function removeEventMark(\AppBundle\Entity\MarkEvent $eventMark)
+    {
+        $this->event_marks->removeElement($eventMark);
+    }
+
+    /**
+     * Get eventMarks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventMarks()
+    {
+        return $this->event_marks;
+    }
+
+    /**
+     * Add placeComment
+     *
+     * @param \AppBundle\Entity\Comment_Place $placeComment
+     *
+     * @return User
+     */
+    public function addPlaceComment(\AppBundle\Entity\Comment_Place $placeComment)
+    {
+        $this->place_comments[] = $placeComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove placeComment
+     *
+     * @param \AppBundle\Entity\Comment_Place $placeComment
+     */
+    public function removePlaceComment(\AppBundle\Entity\Comment_Place $placeComment)
+    {
+        $this->place_comments->removeElement($placeComment);
+    }
+
+    /**
+     * Get placeComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlaceComments()
+    {
+        return $this->place_comments;
+    }
+
+    /**
+     * Add eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     *
+     * @return User
+     */
+    public function addEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments[] = $eventComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventComment
+     *
+     * @param \AppBundle\Entity\Comment_Event $eventComment
+     */
+    public function removeEventComment(\AppBundle\Entity\Comment_Event $eventComment)
+    {
+        $this->event_comments->removeElement($eventComment);
+    }
+
+    /**
+     * Get eventComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventComments()
+    {
+        return $this->event_comments;
+    }
 }

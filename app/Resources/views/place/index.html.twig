@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Lista lokali</h1>
+    <h1>Place list</h1>
 
     <table>
         <thead>
@@ -26,7 +26,7 @@
                             <a href="{{ path('place_show', { 'id': place.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edytuj</a>
+                            <a href="{{ path('place_edit', { 'id': place.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('place_new') }}">Stwórz nowy lokal</a>
+            <a href="{{ path('place_new') }}">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,9 +17,9 @@ class PlaceType extends AbstractType
     {
         $builder
             ->setAction('')
-            ->add('name')
-            ->add('category')
-            ->add('description')
+            ->add('name',TextType::class,['label' => 'Nazwa'])
+            ->add('category',TextType::class,['label' => 'Kategoria'])
+            ->add('description',TextType::class,['label' => 'Opis'])
         ;
     }
     
