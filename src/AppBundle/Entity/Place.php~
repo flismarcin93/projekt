@@ -185,9 +185,9 @@ class Place
      *
      * @return Place
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(\AppBundle\Entity\Comment_Place $commentt)
     {
-        $this->comments[] = $comment;
+        $this->comments[] = $commentt;
 
         return $this;
     }
@@ -197,7 +197,7 @@ class Place
      *
      * @param \AppBundle\Entity\Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(\AppBundle\Entity\Comment_Place $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -219,7 +219,7 @@ class Place
      *
      * @return Place
      */
-    public function addMark(\AppBundle\Entity\Mark $mark)
+    public function addMark(\AppBundle\Entity\Mark_Placee $mark)
     {
         $this->marks[] = $mark;
 
@@ -231,7 +231,7 @@ class Place
      *
      * @param \AppBundle\Entity\Mark $mark
      */
-    public function removeMark(\AppBundle\Entity\Mark $mark)
+    public function removeMark(\AppBundle\Entity\Mark_Place $mark)
     {
         $this->marks->removeElement($mark);
     }

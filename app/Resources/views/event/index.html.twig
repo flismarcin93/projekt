@@ -1,37 +1,30 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
     <h1>Lista wydarzeń</h1>
 
-    <table>
+    <table class="tabela2">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Data</th>
+                <th>Miejsce</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
         {% for event in events %}
             <tr>
-                <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a></td>
-                <td>{{ event.description }}</td>
+                <td>{{ event.name }}</td>
+                <td style="width: 20%">{{ event.description }}</td>
                 <td>{% if event.date %}{{ event.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ event.place }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('event_show', { 'id': event.id }) }}">Pokaz</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('event_edit', { 'id': event.id }) }}">Edytuj</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a>
-                        </li>
-                    </ul>
+                    <table>
+                    <tr><td><button><a href="{{ path('event_show', { 'id': event.id }) }}">Pokaz</a></button></td></tr>
+                        <tr><td><button><a href="{{ path('event_edit', { 'id': event.id }) }}">Edytuj</a></button></td></tr>
+                        <tr><td><button><a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a></button></td></tr>
+                    </table>
                 </td>
             </tr>
         {% endfor %}

@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>event usuwanie</h1>
-    <ul>
-
-        <li>
-            <a href="{{ path('event_show', { 'id': event.id }) }}">NIE</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-
+<table class="tabela2">
+    <thead>
+    <tr>
+        <th colspan="2">Czy na pewno chcesz usunąć wydarzenie: {{ event.name }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="width: 50%; text-align: center"><button><a href="{{ path('event_index', { 'id': event.id }) }}">NIE</a></button></td>
+        <td>{{ form_start(delete_form) }}
+            <input type="submit" value="TAK" id="buttton">
+            {{ form_end(delete_form) }}</td>
+    </tr>
+    </tbody>
+</table>
 {% endblock %}

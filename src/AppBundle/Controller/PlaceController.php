@@ -101,7 +101,21 @@ class PlaceController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    /**
+     * Finds and delete a product entity.
+     *
+     * @Route("/{id}/confirm", name="place_confirm")
+     * @Method("GET")
+     */
+    public function confirmAction(Place $place)
+    {
+        $deleteForm = $this->createDeleteForm($place);
 
+        return $this->render('place/delete.html.twig', array(
+            'place' => $place,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
     /**
      * Deletes a Place entity.
      *

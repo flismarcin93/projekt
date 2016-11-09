@@ -1,21 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Place edit</h1>
+    <h1>Edycja miejsca</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Edytuj" />
     {{ form_end(edit_form) }}
 
     <ul>
         <li>
-            <a href="{{ path('place_index') }}">Back to the list</a>
+            <a href="{{ path('place_index') }}">Wróc do listy</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('place_confirm', { 'id': place.id }) }}">Usuń</a>
         </li>
     </ul>
 {% endblock %}

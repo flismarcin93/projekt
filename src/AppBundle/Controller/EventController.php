@@ -83,7 +83,6 @@ class EventController extends Controller
      */
     public function editAction(Request $request, Event $event)
     {
-        $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
@@ -98,7 +97,6 @@ class EventController extends Controller
         return $this->render('event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
