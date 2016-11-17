@@ -6,15 +6,15 @@
     <table class="tabela2">
         <tbody>
             <tr>
-                <th>Name</th>
+                <th>Nazwa</th>
                 <td>{{ place.name }}</td>
             </tr>
             <tr>
-                <th>Category</th>
+                <th>Kategoria</th>
                 <td>{{ place.category }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Opis</th>
                 <td>{{ place.description }}</td>
             </tr>
         </tbody>
@@ -22,14 +22,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('place_index') }}">Back to the list</a>
+            <a href="{{ path('place_index') }}">Wróc do list</a>
         </li>
         <li>
-            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edit</a>
+            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edytuj</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="usuń">
             {{ form_end(delete_form) }}
         </li>
     </ul>

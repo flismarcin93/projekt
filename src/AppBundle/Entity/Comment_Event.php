@@ -35,7 +35,7 @@ class Comment_Event
     protected $event;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="event_comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;

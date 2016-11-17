@@ -7,9 +7,9 @@
         </div>
         <div id="menu">
             <ul>
-                <li id="domowa-zakladka"><a href="{{ path('homepage') }}">Home</a></li>
+                <li id="aktywna-zakladka"><a href="{{ path('homepage') }}">Home</a></li>
                 <li id="zakladka-wydarzenia"><a href="{{ path('event_index') }}">Wydarzenia</a></li>
-                <li id="aktywna-zakladka"><a href="{{ path('place_index') }}">Lokale</a></li>
+                <li id="zakladka-miejsca"><a href="{{ path('place_index') }}">Lokale</a></li>
                 <li id="zakladka-kontakt"><a href="{{ path('contact') }}">Kontakt</a></li>
             </ul>
         </div>
@@ -24,17 +24,8 @@
             </div>
             <div id="opis"> <p>Strona w trakcie budowy. Prosimy o cierpliwość</p></div>
             <div id="lewy">
-                {% for place in places %}
-                    <div class="wpis">
-                        <h2><a href="{{ path('place_show', { 'id': place.id }) }}">{{ place.name }}</a> </h2>
-                        <a href="#" class="post-zdjecie"><img src="{{ asset('bundles/framework/images/pobrane.jpg') }}" alt="Read"/></a>
-                        <div class="kategoria"> {{ place.category }}</div>
-                        <p>{{ place.description }}</p>
-
-                    </div>
-
-
-                {% endfor %}
+                <h2>O mnie</h2>
+                <p>Strona wykonana jako projekt na przedmiot Inżynieria Internetu </p>
             </div>
             <div id="prawy">
                 <p></p>
@@ -42,4 +33,10 @@
             <div class="clear"></div>
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    <style>
+
+
+    </style>
 {% endblock %}

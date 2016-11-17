@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class EventType extends AbstractType
 {
@@ -15,8 +16,8 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name',TextType::class,['label' => 'Nazwa'])
+            ->add('description',TextType::class,['label' => 'Opis'])
             ->add('date')
             ->add('place')
         ;

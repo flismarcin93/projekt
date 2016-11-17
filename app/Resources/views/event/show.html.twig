@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Wydarzenie</h1>
-
+    <div id="caly_blok">
+    <div id="naglowek"> <h1>Wydarzenie</h1></div>
+    <div id="lewy">asdasdasdassa</div>
+<div id="srodek">
     <table class="tabela2">
         <tbody>
             <tr>
@@ -19,7 +21,8 @@
             </tr>
         </tbody>
     </table>
-
+</div>
+    <div id="prawy">
     <ul>
         <li>
             <a href="{{ path('event_index') }}">Powrót do listy</a>
@@ -31,4 +34,7 @@
             <a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a>
         </li>
     </ul>
+</div>
+        <div id="stopka">stopka strony</div>
+    </div>
 {% endblock %}

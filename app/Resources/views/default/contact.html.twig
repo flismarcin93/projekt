@@ -9,37 +9,34 @@
             <ul>
                 <li id="domowa-zakladka"><a href="{{ path('homepage') }}">Home</a></li>
                 <li id="zakladka-wydarzenia"><a href="{{ path('event_index') }}">Wydarzenia</a></li>
-                <li id="aktywna-zakladka"><a href="{{ path('place_index') }}">Lokale</a></li>
-                <li id="zakladka-kontakt"><a href="{{ path('contact') }}">Kontakt</a></li>
+                <li id="zakladka-miejsca"><a href="{{ path('place_index') }}">Lokale</a></li>
+                <li id="aktywna-zakladka"><a href="{{ path('contact') }}">Kontakt</a></li>
             </ul>
         </div>
-
         <div id="blok">
             <div id="zdjecia-blok">
                 <div id="zdjecia">
                     <ul>
-                        <li><a href="#"><img src="{{ asset('bundles/framework/images/logo_symfony.png') }}"></a> </li>
+                        <li><a href="#"><img src="{{ asset('bundles/framework/images/logo_symfony.png') }}" ></a> </li>
                     </ul>
                 </div>
             </div>
             <div id="opis"> <p>Strona w trakcie budowy. Prosimy o cierpliwość</p></div>
             <div id="lewy">
-                {% for place in places %}
-                    <div class="wpis">
-                        <h2><a href="{{ path('place_show', { 'id': place.id }) }}">{{ place.name }}</a> </h2>
-                        <a href="#" class="post-zdjecie"><img src="{{ asset('bundles/framework/images/pobrane.jpg') }}" alt="Read"/></a>
-                        <div class="kategoria"> {{ place.category }}</div>
-                        <p>{{ place.description }}</p>
-
-                    </div>
-
-
-                {% endfor %}
+                <h2>Kontakt</h2>
+                <p>Strona w trakcie budowy. Ewentualny kontakt: flis.marcin93@gmail.com </p>
             </div>
             <div id="prawy">
                 <p></p>
             </div>
             <div class="clear"></div>
         </div>
+
     </div>
+{% endblock %}
+{% block stylesheets %}
+    <style>
+
+
+    </style>
 {% endblock %}

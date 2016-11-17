@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div id="prawy">
     <h1>Edycja wydarzeń</h1>
 
     {{ form_start(edit_form) }}
@@ -16,4 +17,5 @@
             <a href="{{ path('event_confirm', { 'id': event.id }) }}">Usuń</a>
         </li>
     </ul>
+    </div>
 {% endblock %}

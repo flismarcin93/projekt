@@ -50,6 +50,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user")
      */
     protected $event_comments;
+
     public function __construct()
     {
         parent::__construct();

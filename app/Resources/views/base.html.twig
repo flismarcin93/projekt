@@ -2,13 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Tu bywam{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/framework/css/test.css') }}"/>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div id="caly_blok">
+                <div id="naglowek">nagłówek strony</div>
+
+                <div id="lewy">
+                    <p>to jest lewa kolumna układu elementów HTML w tej części kursu CSS</p>
+                </div>
+
+                <div id="srodek">
+                    <p>środkowa kolumna</p>
+                </div>
+
+                <div id="prawy">
+                    <p>prawa kolumna układu elementów HTML</p>
+                </div>
+
+                <div id="stopka">stopka strony</div>
+            </div>
+        {% endblock %}
         {% block javascripts %}{% endblock %}
 
     </body>
