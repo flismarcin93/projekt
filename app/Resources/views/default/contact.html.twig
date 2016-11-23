@@ -1,42 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="caly_blok">
-        <div id="naglowek">
-            <h1><a href="{{ path('homepage') }}">Kraków- tu sie dzieje</a></h1>
-        </div>
-        <div id="menu">
-            <ul>
-                <li id="domowa-zakladka"><a href="{{ path('homepage') }}">Home</a></li>
-                <li id="zakladka-wydarzenia"><a href="{{ path('event_index') }}">Wydarzenia</a></li>
-                <li id="zakladka-miejsca"><a href="{{ path('place_index') }}">Lokale</a></li>
-                <li id="aktywna-zakladka"><a href="{{ path('contact') }}">Kontakt</a></li>
-            </ul>
-        </div>
-        <div id="blok">
-            <div id="zdjecia-blok">
-                <div id="zdjecia">
-                    <ul>
-                        <li><a href="#"><img src="{{ asset('bundles/framework/images/logo_symfony.png') }}" ></a> </li>
-                    </ul>
+    <div class="brand">KRAKÓW TUTAJ SIĘ DZIEJE</div>
+    <div class="address-bar">Strona autorstwa Marcina Flis</div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="{{ path('homepage') }}">GŁÓWNA</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
+                    <li><a href="{{ path('place_index') }}">Lokale</a></li>
+                    <li><a href="{{ path('contact') }}">Kontakt</a> </li>
+                </ul>
+                {#<ul class="nav navbar-nav navbar-right">#}
+                {#<button type="button" class="btn btn-default navbar-btn">Sign in</button>#}
+                {#</ul>#}
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                    <h1>baisudiuasbfuia</h1>
+                    <p>asdasdrfegfvegvfwrenifv]btrfyvyfvbyewgfvy</p>
                 </div>
             </div>
-            <div id="opis"> <p>Strona w trakcie budowy. Prosimy o cierpliwość</p></div>
-            <div id="lewy">
-                <h2>Kontakt</h2>
-                <p>Strona w trakcie budowy. Ewentualny kontakt: flis.marcin93@gmail.com </p>
-            </div>
-            <div id="prawy">
-                <p></p>
-            </div>
-            <div class="clear"></div>
+
         </div>
 
     </div>
-{% endblock %}
-{% block stylesheets %}
-    <style>
+    <!-- /.container -->
 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Marcin Flis</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    </style>
 {% endblock %}
+

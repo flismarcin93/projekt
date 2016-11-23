@@ -44,7 +44,7 @@ class Event
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Place", inversedBy="event")
+     * @ORM\ManyToOne(targetEntity="Place", inversedBy="events")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
      */
     private $place;
@@ -178,9 +178,9 @@ class Event
      *
      * @return Event
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(\AppBundle\Entity\Comment_Event $comment)
     {
-        $this->comments[] = $comment;
+        $this->event_comments[] = $comment;
 
         return $this;
     }
@@ -190,7 +190,7 @@ class Event
      *
      * @param \AppBundle\Entity\Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(\AppBundle\Entity\Comment_Event $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -212,7 +212,7 @@ class Event
      *
      * @return Event
      */
-    public function addMark(\AppBundle\Entity\Mark $mark)
+    public function addMark(\AppBundle\Entity\MarkEvent $mark)
     {
         $this->marks[] = $mark;
 
@@ -224,7 +224,7 @@ class Event
      *
      * @param \AppBundle\Entity\Mark $mark
      */
-    public function removeMark(\AppBundle\Entity\Mark $mark)
+    public function removeMark(\AppBundle\Entity\MarkEvent $mark)
     {
         $this->marks->removeElement($mark);
     }

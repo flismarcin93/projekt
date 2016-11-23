@@ -34,20 +34,11 @@ class User extends BaseUser
  */
     protected $place_marks;
 
-    /**
-     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="user")
-     */
-    protected $event_marks;
+
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="user")
-     */
-    protected $place_comments;
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user_event_coment")
      */
     protected $event_comments;
 

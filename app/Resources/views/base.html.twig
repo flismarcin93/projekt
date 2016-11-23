@@ -6,6 +6,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/framework/css/test.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     </head>
     <body>
         {% block body %}
@@ -27,7 +28,9 @@
                 <div id="stopka">stopka strony</div>
             </div>
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+
 
     </body>
 </html>

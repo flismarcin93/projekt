@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PlaceType extends AbstractType
 {
@@ -20,6 +21,7 @@ class PlaceType extends AbstractType
             ->add('name',TextType::class,['label' => 'Nazwa'])
             ->add('category',TextType::class,['label' => 'Kategoria'])
             ->add('description',TextType::class,['label' => 'Opis'])
+            ->add('picture', FileType::class, array('data_class' => null))
         ;
     }
     

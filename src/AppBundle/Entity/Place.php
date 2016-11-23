@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Place
@@ -62,6 +63,25 @@ class Place
      */
     protected $place_comments;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the product picture as a PNG file.")
+     * @Assert\File(mimeTypes={ "image/png" })
+     */
+    private $picture;
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
 
     /**
      * Get id

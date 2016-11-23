@@ -1,36 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Place</h1>
+    <div class="brand">KRAKÓW TUTAJ SIĘ DZIEJE</div>
+    <div class="address-bar">Strona autorstwa Marcina Flis</div>
 
-    <table class="tabela2">
-        <tbody>
-            <tr>
-                <th>Nazwa</th>
-                <td>{{ place.name }}</td>
-            </tr>
-            <tr>
-                <th>Kategoria</th>
-                <td>{{ place.category }}</td>
-            </tr>
-            <tr>
-                <th>Opis</th>
-                <td>{{ place.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
 
-    <ul>
-        <li>
-            <a href="{{ path('place_index') }}">Wróc do list</a>
-        </li>
-        <li>
-            <a href="{{ path('place_edit', { 'id': place.id }) }}">Edytuj</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="usuń">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Kraków</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
+                    <li><a href="{{ path('place_index') }}">Lokale</a></li>
+                    <li><a href="{{ path('contact') }}">Kontakt</a> </li>
+                </ul>
+                {#<ul class="nav navbar-nav navbar-right">#}
+                {#<button type="button" class="btn btn-default navbar-btn">Sign in</button>#}
+                {#</ul>#}
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Kraków tutaj sie dzieje
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <a class="btn btn-default" href="{{ path('place_index') }}" role="button">Powrót do listy wydarzeń</a>
+                    <img class="img-responsive img-border img-full" src="{{ asset('bundles/framework/images/slide-1.jpg') }}" alt="">
+                    <h2>{{ place.name }}
+                        <br>
+                        <small>{{ place.category }}</small>
+                    </h2>
+                    <p>{{ place.description }}</p>
+                    <a href="{{ path('place_edit', { 'id': place.id }) }}" class="btn btn-default btn-lg">Edytuj</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Marcin Flis</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}
+

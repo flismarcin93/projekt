@@ -46,6 +46,10 @@ class PlaceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $place->getPicture();
+            $fileName = $this->get('app.brochure_uploader')->upload($file);
+
+            $place->setPicture($fileName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($place);
             $em->flush();
