@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Mark_Place list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mark</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mark_Place in mark_Places %}
+            <tr>
+                <td><a href="{{ path('mark_place_show', { 'id': mark_Place.id }) }}">{{ mark_Place.id }}</a></td>
+                <td>{{ mark_Place.mark }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('mark_place_show', { 'id': mark_Place.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('mark_place_edit', { 'id': mark_Place.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('mark_place_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

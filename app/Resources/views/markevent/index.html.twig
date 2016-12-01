@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MarkEvent list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mark</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for markEvent in markEvents %}
+            <tr>
+                <td><a href="{{ path('markevent_show', { 'id': markEvent.id }) }}">{{ markEvent.id }}</a></td>
+                <td>{{ markEvent.mark }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('markevent_show', { 'id': markEvent.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('markevent_edit', { 'id': markEvent.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('markevent_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

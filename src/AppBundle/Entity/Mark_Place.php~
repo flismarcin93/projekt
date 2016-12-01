@@ -35,11 +35,11 @@ class Mark_Place
     private $place;
 
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="User", inversedBy="marks")
-//     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-//     */
-//    private $user;
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="marks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
     /**
      * Get id
      *

@@ -61,10 +61,12 @@ class Event
      * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="event")
      */
     protected $event_comments;
+
     public function __construct()
     {
         $this->comments=new ArrayCollection();
         $this->marks=new ArrayCollection();
+        $this->date = new \DateTime();
     }
     /**
      * @ORM\Column(type="string")
@@ -73,6 +75,7 @@ class Event
      * @Assert\File(mimeTypes={ "image/png" })
      */
     private $picture;
+
 
     public function getPicture()
     {
@@ -84,6 +87,33 @@ class Event
         $this->picture = $picture;
 
         return $this;
+    }
+    public function getAbsolutePath()
+    {
+        return null === $this->picture
+            ? null
+            : $this->getUploadRootDir().'/'.$this->picture;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->picture
+            ? null
+            : $this->getUploadDir().'/'.$this->picture;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads';
     }
 /**
      * Get id
@@ -190,39 +220,7 @@ class Event
         return $this->place;
     }
 
-    /**
-     * Add comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     *
-     * @return Event
-     */
-    public function addComment(\AppBundle\Entity\Comment_Event $comment)
-    {
-        $this->event_comments[] = $comment;
 
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     */
-    public function removeComment(\AppBundle\Entity\Comment_Event $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
 
     /**
      * Add mark

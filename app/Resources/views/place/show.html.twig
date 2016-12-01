@@ -25,35 +25,70 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="container">
+    <div class="container" style="width: 75%">
+        <div class="col-lg-12 text-center">
+            <a class="btn btn-default" href="{{ path('place_index') }}" role="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true">Powrót do listy lokali</span></a>
+            <hr>
 
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">Kraków tutaj sie dzieje
-                    </h2>
-                    <hr>
-                </div>
+            <h2 class="intro-text text-center">{{ place.name }}
+            </h2>
+            <hr>
+        </div>
+    </div>
+    <div class="container" style="width: 75%; margin-bottom: 100px">
+        <div class="row" style="margin-left: 0px; margin-right: 0px">
+            <div class="box" style="width: 100%">
                 <div class="col-lg-12 text-center">
-                    <a class="btn btn-default" href="{{ path('place_index') }}" role="button">Powrót do listy wydarzeń</a>
-                    <img class="img-responsive img-border img-full" src="{{ asset('bundles/framework/images/slide-1.jpg') }}" alt="">
-                    <h2>{{ place.name }}
-                        <br>
-                        <small>{{ place.category }}</small>
-                    </h2>
-                    <p>{{ place.description }}</p>
-                    <a href="{{ path('place_edit', { 'id': place.id }) }}" class="btn btn-default btn-lg">Edytuj</a>
+
+                    <img class="img-responsive img-border img-full img-thumbnail" src="{{ asset('uploads/brochures/' ~ place.picture) }}">
+                    <p> Kategoria: {{ place.category }}</p>
+                    <p>Opis: {{ place.description }}</p>
+                    <hr>
+                    <h2>Oceny:</h2>
+                    <hr>
+                    {% for mark in marks %}
+                        <p>ocena: {{ mark.mark }}</p>
+                    {% endfor %}
+                    <hr>
+                    <h2>Komentarze:</h2>
+                    <hr>
+                    <div class="comments" style="margin-outside: 120px">
+                        {% for coment in coments %}
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">user:{{ coment.user }}</h4>
+                                    <p>komentarz:{{ coment.content }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ path('place_edit', { 'id': place.id }) }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-edit" aria-hidden="true">Edytuj</span></a>
+                    <a href="{{ path('comment_place_new', { 'id': place.id }) }}" class="btn btn-default btn-lg" target="cos" onclick="onls()"><span class="glyphicon glyphicon-comment" aria-hidden="true">Skomentuj</span></a>
+                    <a href="{{ path('mark_place_new', { 'id': place.id }) }}" class="btn btn-default btn-lg" target="cos2" onclick="onls2()"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">Oceń</span></a>
                     <hr>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container -->
 
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <iframe src="" name="cos" height="75%" width="100%">
+            </iframe>
+        </div>
+    </div>
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close2">x</span>
+            <iframe src="" name="cos2" height="100%" width="100%">
+            </iframe>
+        </div>
+    </div>
+
     <footer>
-        <div class="container">
+        <div class="container" style="width: 100%">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <p>Marcin Flis</p>
@@ -61,5 +96,26 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        var modal2=document.getElementById('myModal2');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        var span2=document.getElementById('close2');
+        function onls() {
+            modal.style.display="block";
+        }
+        function onls2() {
+            modal2.style.display="block";
+        }
+        span.onclick=function () {
+            modal.style.display="none";
+        }
+        span2.onclick=function () {
+            modal2.style.display="none";
+        }
+    </script>
 {% endblock %}
 

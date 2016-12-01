@@ -48,10 +48,7 @@ class Place
      * @ORM\OneToMany(targetEntity="Event", mappedBy="place")
      */
     protected $events;
-   // public function __construct()
-    //{
-     //   $this->events=new ArrayCollection();
-    //}
+
     /**
      * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place")
      */
@@ -198,39 +195,6 @@ class Place
         return $this->events;
     }
 
-    /**
-     * Add comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     *
-     * @return Place
-     */
-    public function addComment(\AppBundle\Entity\Comment_Place $commentt)
-    {
-        $this->comments[] = $commentt;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \AppBundle\Entity\Comment_Place $comment
-     */
-    public function removeComment(\AppBundle\Entity\Comment_Place $commentt)
-    {
-        $this->comments->removeElement($commentt);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
 
     /**
      * Add mark

@@ -73,8 +73,19 @@ class PlaceController extends Controller
     {
         $deleteForm = $this->createDeleteForm($place);
 
+        $places = $this->getDoctrine()
+            ->getRepository('AppBundle:Place')
+            ->find($place);
+
+
+        $comments = $places->getPlaceComments();
+
+        $marks=$places->getMarks();
+
         return $this->render('place/show.html.twig', array(
             'place' => $place,
+            'coments'=>$comments,
+            'marks'=>$marks,
             'delete_form' => $deleteForm->createView(),
         ));
     }

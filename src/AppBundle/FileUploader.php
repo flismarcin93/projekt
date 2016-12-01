@@ -10,7 +10,7 @@ namespace AppBundle;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class FileUploader
+class FileUploader extends UploadedFile
 {
     private $targetDir;
 

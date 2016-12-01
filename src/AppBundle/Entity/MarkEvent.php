@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * MarkEvent
@@ -25,6 +27,10 @@ class MarkEvent
      * @var int
      *
      * @ORM\Column(name="mark", type="integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *     )
      */
     private $mark;
 

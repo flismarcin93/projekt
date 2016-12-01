@@ -13,10 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $events = $em->getRepository('AppBundle:Event')->findAll();
         // replace this example code with whatever you need
-        return $this->render('default/main.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('default/main.html.twig', array(
+            'events' => $events,
+
+        ));
     }
 
     /**

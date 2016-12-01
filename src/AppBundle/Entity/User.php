@@ -9,16 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
- */
-/**
- * @ORM\Entity
- * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="username", message="Username already taken")
  */
 class User extends BaseUser
 {
@@ -38,9 +34,14 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user_event_coment")
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="user")
      */
     protected $event_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="user")
+     */
+    protected $place_comments;
 
     public function __construct()
     {
