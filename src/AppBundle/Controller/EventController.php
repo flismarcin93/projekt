@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Event;
+use AppBundle\Entity\MarkEvent;
 use AppBundle\Form\EventType;
 use AppBundle\Entity\Comment_Event;
 
@@ -84,12 +85,21 @@ class EventController extends Controller
 
         $marks=$events->getMarks();
         $user = $this->getUser();
+        $suma=0;
+        $ilosc=0;
+        foreach ( $marks as $item )
+        {
+            $suma+=$item->getMark();
+            $ilosc++;
+        }
+        $srednia=$suma/$ilosc;
 
         return $this->render('event/show.html.twig', array(
             'event' => $event,
             'coments'=>$comments,
             'marks'=>$marks,
             'user'=>$user,
+            'srednia'=>$srednia,
             'delete_form' => $deleteForm->createView(),
         ));
     }

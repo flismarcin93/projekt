@@ -44,7 +44,7 @@ class Comment_EventController extends Controller
     {
         $user = $this->getUser();
         $comment_Event = new Comment_Event();
-        $comment_Event->setContent("zawartość");
+//        $comment_Event->setContent("zawartość");
         $comment_Event->setUser($user);
         $comment_Event->setEvent($event);
         $form = $this->createForm('AppBundle\Form\Comment_EventType', $comment_Event);
