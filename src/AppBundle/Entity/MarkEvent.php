@@ -36,7 +36,7 @@ class MarkEvent
 
     /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="marks")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $event;
 

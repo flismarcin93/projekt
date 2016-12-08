@@ -51,14 +51,14 @@ class Event
     private $place;
 
     /**
-     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="MarkEvent", mappedBy="event", cascade={"all"})
      *
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Comment_Event", mappedBy="event", cascade={"all"})
      */
     protected $event_comments;
 
@@ -68,14 +68,14 @@ class Event
         $this->marks=new ArrayCollection();
         $this->date = new \DateTime();
     }
+
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the product picture as a PNG file.")
-     * @Assert\File(mimeTypes={ "image/png" })
+     * @Assert\NotBlank(message="Please, upload the product picture as a JPG file.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
-
 
     public function getPicture()
     {
@@ -88,33 +88,8 @@ class Event
 
         return $this;
     }
-    public function getAbsolutePath()
-    {
-        return null === $this->picture
-            ? null
-            : $this->getUploadRootDir().'/'.$this->picture;
-    }
 
-    public function getWebPath()
-    {
-        return null === $this->picture
-            ? null
-            : $this->getUploadDir().'/'.$this->picture;
-    }
 
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads';
-    }
 /**
      * Get id
      *

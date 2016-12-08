@@ -6,13 +6,9 @@
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-
                 <a class="navbar-brand" href="{{ path('homepage') }}">GŁÓWNA</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
@@ -22,13 +18,13 @@
                 {#<button type="button" id="exa" class="btn btn-default"  >#}
                     {#Popover on left#}
                 {#</button>#}
-                <p id="asas">Click me away!</p>
-                <ul class="nav navbar-nav navbar-right">
-                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-lg">Zaloguj</a>
+                {#<p id="asas">Click me away!</p>#}
+                {#<ul class="nav navbar-nav navbar-right">#}
+                    {#<a href="{{ path('fos_user_security_login') }}" class="btn btn-default btn-lg">Zaloguj</a>#}
                     {#{{ user.id }}#}
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+                {#</ul>#}
+            </div>
+        </div>
     </nav>
     <div class="container">
 
@@ -36,16 +32,12 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
                     <ol class="carousel-indicators hidden-xs">
                         {% for event in events %}
-                        {#<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>#}
-                        {#<li data-target="#carousel-example-generic" data-slide-to="1"></li>#}
                         <li data-target="#carousel-example-generic"></li>
                         {% endfor %}
                     </ol>
 
-                    <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="item active">
                             <img class="img-responsive img-full" src="{{ asset('bundles/framework/images/slide-1.jpg') }}" alt="">
@@ -65,10 +57,17 @@
                         <span class="icon-next"></span>
                     </a>
                 </div>
+                    <p>Często dowiadujesz się o jakimś koncercie czytając już tylko relację z niego? Zaglądaj na tę stronę, żeby byc na bieżąco z wydarzeniami kulturalnymi w Krakowie.</p>
+                    <p>Szukasz fajnego i miłego miejsca na spedzenie chwili wolnego czasu, poznaj opinie i komentarze gości tych lokali</p>
+                    <p>Moja strona jest odpowiedzią na twoje potrzeby</p>
+                    <p>W sekcji wydarzenia odnajdziejsz najbliższe wydarzenia</p>
+                    <p>W sekcji lokale znajdziejsz spis wszystkich interesujacyh lokali w Krakowie wraz z ich ocenami i opiniami</p>
+                    <p>Zapraszam do korzystania:)</p>
             </div>
         </div>
 
     </div>
+
 
     </div>
     <!-- /.container -->

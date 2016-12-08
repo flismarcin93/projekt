@@ -81,11 +81,23 @@ class PlaceController extends Controller
         $comments = $places->getPlaceComments();
 
         $marks=$places->getMarks();
+        $user = $this->getUser();
+        $suma=0;
+        $ilosc=0;
+        foreach ( $marks as $item )
+        {
+            $suma+=$item->getMark();
+            $ilosc++;
+        }
+        if ($ilosc>0){$srednia=round($suma/$ilosc,1);}
+        else $srednia=0;
 
         return $this->render('place/show.html.twig', array(
             'place' => $place,
             'coments'=>$comments,
             'marks'=>$marks,
+            'user'=>$user,
+            'srednia'=>$srednia,
             'delete_form' => $deleteForm->createView(),
         ));
     }

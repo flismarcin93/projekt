@@ -45,26 +45,26 @@ class Place
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="place" )
      */
     protected $events;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place", cascade={"all"})
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="place", cascade={"all"})
      */
     protected $place_comments;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the product picture as a PNG file.")
-     * @Assert\File(mimeTypes={ "image/png" })
+     * @Assert\NotBlank(message="Please, upload the product picture as a JPG file.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
 
@@ -195,39 +195,6 @@ class Place
         return $this->events;
     }
 
-    /**
-     * Add comment
-     *
-     * @param \AppBundle\Entity\Comment $comment
-     *
-     * @return Place
-     */
-    public function addComment(\AppBundle\Entity\Comment_Place $commentt)
-    {
-        $this->comments[] = $commentt;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \AppBundle\Entity\Comment_Place $comment
-     */
-    public function removeComment(\AppBundle\Entity\Comment_Place $commentt)
-    {
-        $this->comments->removeElement($commentt);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
 
     /**
      * Add mark

@@ -45,26 +45,26 @@ class Place
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="place", cascade={"all"} )
      */
     protected $events;
 
     /**
-     * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Mark_Place", mappedBy="place", cascade={"all"})
      */
     protected $marks;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="Comment_Place", mappedBy="place", cascade={"all"})
      */
     protected $place_comments;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the product picture as a PNG file.")
-     * @Assert\File(mimeTypes={ "image/png" })
+     * @Assert\NotBlank(message="Please, upload the product picture as a JPG file.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
 

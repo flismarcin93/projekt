@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
     <div class="brand">KRAKÓW TUTAJ SIĘ DZIEJE</div>
-    <div class="address-bar">Strona autorstwa Marcina Flis</div>
+    <div class="address-bar">Strona o wydarzeniach w Krakowie</div>
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-
                 <a class="navbar-brand" href="{{ path('homepage') }}">Kraków</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
                     <li><a href="{{ path('place_index') }}">Lokale</a></li>
                     <li><a href="{{ path('contact') }}">Kontakt</a> </li>
                 </ul>
-                {#<ul class="nav navbar-nav navbar-right">#}
-                {#<button type="button" class="btn btn-default navbar-btn">Sign in</button>#}
-                {#</ul>#}
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+                <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_USER') -%}   <p>Jestes zalogowany jako: {{ user.username }}</p>
+                    <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
+                {% endif %}
+
+                </ul>
+            </div>
+        </div>
     </nav>
     <div class="container" style="width: 75%">
         <div class="col-lg-12 text-center">
@@ -31,6 +31,7 @@
             <hr>
 
             <h2 class="intro-text text-center">{{ event.name }}
+
             </h2>
             <hr>
         </div>
@@ -39,39 +40,91 @@
         <div class="row" style="margin-left: 0px; margin-right: 0px">
             <div class="box" style="width: 100%">
                 <div class="col-lg-12 text-center">
-                    <h2>{% if event.date %}{{ event.date|date('d m Y') }}{% endif %}</h2>
+                    <h4>{% if event.date %}{{ event.date|date('d m Y') }}{% endif %}</h4>
                     <img class="img-responsive img-border img-full img-thumbnail" src="{{ asset('uploads/brochures/' ~ event.picture) }}">
-                    <p> Miejsce: {{ event.place }}</p>
-                    <p>Opis: {{ event.description }}</p>
+                    <p> {{ event.place }}</p>
+                    <p>{{ event.description }}</p>
                     <hr>
-                    <h2>Oceny:{{ srednia }}</h2>
+                    <h5>Oceny: {{ srednia }}
+                    {% if srednia<=1 %}
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+
+                    {% endif %}
+                    {% if srednia>1 and srednia<2 %}
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+
+                    {% endif %}
+                    {% if srednia>2 and srednia <3%}
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+
+                    {% endif %}
+                    {% if srednia>3 and srednia<4 %}
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    {% endif %}
+                    {% if srednia>4 %}
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                    {% endif %}
+                    {% if srednia==5 %}
+                        <span class="glyphicon glyphicon-star big"></span>
+                    {% endif %}
+                    </h5>
                     <hr>
-                    {% for mark in marks %}
-                        <p>ocena:{{ mark.mark }}</p>
-                    {% endfor %}
-                    <hr>
-                    <h2>Komentarze:</h2>
+                    <h5>Komentarze:</h5>
                     <hr>
                     <div class="comments"  style="margin-outside: 120px">
                     {% for coment in coments %}
                     <div class="media">
                         <div class="media-body">
-                            <h4 class="media-heading">user:{{ coment.user }}</h4>
-                            <p>komentarz:{{ coment.content }}</p>
+                            <h4 class="media-heading">{{ coment.user }}</h4>
+                            <p>{{ coment.content }}</p>
                         </div>
                     </div>
                     {% endfor %}
+
                     </div>
+                    {% if is_granted('ROLE_ADMIN') -%}
                     <a href="{{ path('event_edit', { 'id': event.id }) }}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-edit" aria-hidden="true">Edytuj</span></a>
+                    {% elseif is_granted('ROLE_USER') -%}
                     <a href="{{ path('comment_event_new', { 'id': event.id }) }}" class="btn btn-default btn-lg" target="cos" onclick="onls()"><span class="glyphicon glyphicon-comment" aria-hidden="true">Skomentuj</span></a>
                     <a href="{{ path('markevent_new', { 'id': event.id }) }}" class="btn btn-default btn-lg" target="cos2" onclick="onls2()"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">Oceń</span></a>
+                    {% else %}
+
+                        {% block content %}
+
+                            {% block fos_user_content %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p>Musisz sie zalogowac aby miec mozliwosc komentowania i oceniania</p>
+                                    {{ render(controller('FOSUserBundle:Security:login')) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Jesli nie masz jeszcze konta zarejestruj sie:</p>
+                                    {{ render(controller('FOSUserBundle:Registration:register')) }}
+                                </div>
+                            </div>
+                            {% endblock fos_user_content %}
+                        {% endblock content %}
+                    {% endif %}
                     <hr>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.container -->
-
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">x</span>
@@ -82,11 +135,10 @@
     <div id="myModal2" class="modal">
         <div class="modal-content">
             <span class="close" id="close2">x</span>
-            <iframe src="" name="cos2" height="100%" width="100%">
+            <iframe src="" name="cos2" height="75%" width="100%">
             </iframe>
         </div>
     </div>
-
     <footer>
         <div class="container" style="width: 100%">
             <div class="row">
@@ -97,25 +149,27 @@
         </div>
     </footer>
     <script>
-        // Get the modal
         var modal = document.getElementById('myModal');
         var modal2=document.getElementById('myModal2');
 
-        // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
         var span2=document.getElementById('close2');
+
         function onls() {
             modal.style.display="block";
         }
         function onls2() {
             modal2.style.display="block";
         }
+
         span.onclick=function () {
             modal.style.display="none";
         }
         span2.onclick=function () {
             modal2.style.display="none";
         }
+
+
     </script>
 {% endblock %}
 

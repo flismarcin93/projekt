@@ -30,7 +30,7 @@ class Mark_Place
 
     /**
      * @ORM\ManyToOne(targetEntity="Place", inversedBy="place_marks")
-     * @ORM\JoinColumn(name="place_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="place_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $place;
 

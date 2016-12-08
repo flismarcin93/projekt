@@ -28,7 +28,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('AppBundle:Event')->findBy([], ['date' => 'DESC']);
+        $events = $em->getRepository('AppBundle:Event')->findBy([], ['date' => 'ASC']);
 
         return $this->render('event/index.html.twig', array(
             'events' => $events,
@@ -47,8 +47,8 @@ class EventController extends Controller
 
         $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
-//        $data = $form->getData();
-//        $event->setDate($data);
+//        $dataa = $form->getData();
+//        $event->setDate($dataa);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $event->getPicture();
             $fileName = $this->get('app.brochure_uploader')->upload($file);
@@ -76,7 +76,6 @@ class EventController extends Controller
     public function showAction(Event $event)
     {
         $deleteForm = $this->createDeleteForm($event);
-
         $events = $this->getDoctrine()
             ->getRepository('AppBundle:Event')
             ->find($event);
@@ -92,7 +91,8 @@ class EventController extends Controller
             $suma+=$item->getMark();
             $ilosc++;
         }
-        $srednia=$suma/$ilosc;
+        if ($ilosc>0){$srednia=round($suma/$ilosc,1);}
+        else $srednia=0;
 
         return $this->render('event/show.html.twig', array(
             'event' => $event,
@@ -156,6 +156,8 @@ class EventController extends Controller
     {
         $form = $this->createDeleteForm($event);
         $form->handleRequest($request);
+        $comments = $event->getEventComments();
+        $marks=$event->getMarks();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

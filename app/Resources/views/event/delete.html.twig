@@ -2,28 +2,23 @@
 
 {% block body %}
     <div class="brand">KRAKÓW TUTAJ SIĘ DZIEJE</div>
-    <div class="address-bar">Strona autorstwa Marcina Flis</div>
+    <div class="address-bar">Strona o wydarzeniach w Krakowie</div>
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
 
                 <a class="navbar-brand" href="{{ path('homepage') }}">Kraków</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
                     <li><a href="{{ path('place_index') }}">Lokale</a></li>
                     <li><a href="{{ path('contact') }}">Kontakt</a> </li>
                 </ul>
-                {#<ul class="nav navbar-nav navbar-right">#}
-                {#<button type="button" class="btn btn-default navbar-btn">Sign in</button>#}
-                {#</ul>#}
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+
+            </div>
+        </div>
     </nav>
     <div class="container">
 
@@ -35,11 +30,15 @@
                     </h2>
                     <hr>
                 </div>
+                <div class="text-center">
                 <h2>Czy na pewno chcesz usunąć wydarzenie: {{ event.name }}</h2>
-                <a class="btn btn-default" href="{{ path('event_index') }}" role="button">NIE</a>
-                {{ form_start(delete_form) }}
-                <input type="submit" class="btn btn-default" value="TAK" >
-                {{ form_end(delete_form) }}
+                     <a class="btn btn-default left" href="{{ path('event_index') }}" role="button">NIE</a>
+
+                    {{ form_start(delete_form) }}
+                    <input type="submit" class="btn btn-default right" value="TAK" >
+                    {{ form_end(delete_form) }}
+                </div>
+
             </div>
         </div>
 

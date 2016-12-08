@@ -2,28 +2,20 @@
 
 {% block body %}
     <div class="brand">KRAKÓW TUTAJ SIĘ DZIEJE</div>
-    <div class="address-bar">Strona autorstwa Marcina Flis</div>
-
+    <div class="address-bar">Strona o wydarzeniach w Krakowie</div>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-
                 <a class="navbar-brand" href="{{ path('homepage') }}">Kraków</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('event_index') }}">Wydarzenia</a></li>
                     <li><a href="{{ path('place_index') }}">Lokale</a></li>
                     <li><a href="{{ path('contact') }}">Kontakt</a> </li>
                 </ul>
-                {#<ul class="nav navbar-nav navbar-right">#}
-                {#<button type="button" class="btn btn-default navbar-btn">Sign in</button>#}
-                {#</ul>#}
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
     <div class="container" style="width: 75%">
         <div class="col-lg-12 text-center">
@@ -32,7 +24,9 @@
             </h2>
             <hr>
         </div>
+        {% if is_granted('ROLE_ADMIN') -%}
         <a class="btn btn-default" href="{{ path('place_new') }}" role="button">New</a>
+        {% endif %}
     </div>
     <div class="container" style="width: 75%; margin-bottom: 100px">
         <div class="row" style="margin-left: 0px; margin-right: 0px">
@@ -49,13 +43,9 @@
                         <hr>
                     </div>
                 {% endfor %}
-
             </div>
         </div>
-
     </div>
-    <!-- /.container -->
-
     <footer>
         <div class="container" style="width: 100%">
             <div class="row">
